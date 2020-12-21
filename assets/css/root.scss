@@ -1,0 +1,16 @@
+@layer components {
+  .nav--main {
+    ul {
+      li {
+        @apply uppercase
+      }
+      li a {
+        @apply text-gray-50 hover:text-pink-400
+      }
+
+      li:not(:last-of-type) {
+        @apply mr-8
+      }
+    }
+  }
+}
