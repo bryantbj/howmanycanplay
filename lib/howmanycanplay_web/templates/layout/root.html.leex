@@ -5,24 +5,32 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <%= csrf_meta_tag() %>
-    <%= live_title_tag assigns[:page_title] || "Howmanycanplay", suffix: " · Phoenix Framework" %>
+    <%= live_title_tag assigns[:page_title] || "HMCP", suffix: " · How Many Can Play?" %>
     <link phx-track-static rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
     <script defer phx-track-static type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
   </head>
-  <body>
-    <header>
-      <section class="px-8 bg-purple-900 text-gray-50 ">
-        <nav role="navigation" class="nav--main block">
-          <ul class="flex">
-            <li><%= link "How many can play?", to: Routes.page_path(@conn, :index) %></li>
-
-            <%= if function_exported?(Routes, :live_dashboard_path, 2) do %>
-              <li><%= link "LiveDashboard", to: Routes.live_dashboard_path(@conn, :home) %></li>
-            <% end %>
-          </ul>
-        </nav>
-      </section>
-    </header>
+  <body class="bg-gray-100">
+    <%# header. may or may not use %>
+    <% if false do %>
+      <header class="grid grid-cols-12 bg-purple-900">
+        <section class="px-8  text-gray-50 col-span-8 col-start-3">
+          <nav role="navigation" class="nav--main block">
+            <ul class="flex">
+              <li><%= link "How many can play?", to: Routes.page_path(@conn, :index) %></li>
+              <%= if false && function_exported?(Routes, :live_dashboard_path, 2) do %>
+                <li><%= link to: Routes.live_dashboard_path(@conn, :home) do %>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="text-gray-50" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
+                    </svg>
+                  <% end %>
+                </li>
+              <% end %>
+            </ul>
+          </nav>
+        </section>
+      </header>
+    <% end %>
+    <%# end header %>
     <%= @inner_content %>
   </body>
 </html>

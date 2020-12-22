@@ -1,8 +1,30 @@
+html, body {
+  height: 100%;
+}
+
+@layer base {
+  body {
+    @apply text-gray-700;
+  }
+
+  h1 {
+    @apply text-5xl;
+  }
+  h2 {
+    @apply text-4xl;
+  }
+}
+
 @layer components {
   .nav--main {
     ul {
       li {
         @apply uppercase
+      }
+      li a {
+        display: inline-block;
+        position: relative;
+        z-index: 1;
       }
       li a {
         @apply text-gray-50 hover:text-pink-400
@@ -13,4 +35,12 @@
       }
     }
   }
+}
+
+.heading {
+  @apply text-5xl py-6
+}
+
+.card {
+  @apply p-12 rounded-2xl
 }
