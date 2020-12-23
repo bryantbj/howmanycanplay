@@ -30,10 +30,31 @@ defmodule HowmanycanplayWeb.PageLive do
       raise "action disabled when not in development"
     end
 
-    for {app, desc, vsn} <- Application.started_applications(),
-        app = to_string(app),
-        String.starts_with?(app, query) and not List.starts_with?(desc, ~c"ERTS"),
-        into: %{},
-        do: {app, vsn}
+    case String.length(query) do
+      0 ->
+        %{}
+
+      _ ->
+        result =
+          games()
+          |> Enum.find(fn str -> String.match?(str, ~r/#{query}/i) end)
+
+        (result && %{1 => result}) || %{1 => "No game found for search \"#{query}\""}
+    end
+
+    # for {app, desc, vsn} <- Application.started_applications(),
+    #     app = to_string(app),
+    #     String.starts_with?(app, query) and not List.starts_with?(desc, ~c"ERTS"),
+    #     into: %{},
+    #     do: {app, vsn}
+  end
+
+  defp games do
+    [
+      "Destiny 2",
+      "Overwatch",
+      "Guild Wars 2",
+      "Call of Duty: Modern Warfare"
+    ]
   end
 end

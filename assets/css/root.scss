@@ -13,6 +13,7 @@ html, body {
   h2 {
     @apply text-4xl;
   }
+  
 }
 
 @layer components {
@@ -34,6 +35,22 @@ html, body {
         @apply mr-8
       }
     }
+  }
+
+  .min-h-25 {
+    min-height: 25vh;
+  }
+  .min-h-33 {
+    min-height: 33vh;
+  }
+  .min-h-50 {
+    min-height: 50vh;
+  }
+  .min-h-66 {
+    min-height: 66vh;
+  }
+  .min-h-75 {
+    min-height: 75vh;
   }
 }
 

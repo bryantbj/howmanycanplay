@@ -1,4 +1,13 @@
-<section class="card bg-gray-50 lg:w-1/2 lg:m-auto lg:mt-32 lg:shadow-lg">
+<section class="card bg-gray-50 lg:w-1/2 lg:m-auto lg:mt-32 lg:shadow-xl">
   <h1 class="heading text-center">How many can play</h1>
-  <input type="text" />
+  <form phx-change="suggest" >
+    <input phx-change="suggest" phx-debounce="200" type="text" name="q" value="<%= @query %>" placeholder="Game search" list="results" autocomplete="off" />
+  </form>
+  <div>
+    <ul>
+      <%= for {num, val} <- @results do %>
+        <li><%= val %></li>
+      <% end %>
+    </ul>
+  </div>
 </section>
