@@ -25,6 +25,13 @@ defmodule HowmanycanplayWeb.PageLive do
     end
   end
 
+  def handle_event("select", %{"game" => game, "q" => query}, socket) do
+    game
+    |> IO.inspect(label: "game")
+
+    {:noreply, socket |> assign(results: %{}, query: query)}
+  end
+
   defp search(query) do
     if not HowmanycanplayWeb.Endpoint.config(:code_reloader) do
       raise "action disabled when not in development"

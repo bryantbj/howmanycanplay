@@ -18,6 +18,12 @@ defmodule HowmanycanplayWeb.Router do
     pipe_through :browser
 
     live "/", PageLive, :index
+
+    resources "/games", GameController
+
+    # scope "games", HowmanycanplayWeb do
+    #   get "/:id", GameController, :show
+    # end
   end
 
   # Other scopes may use custom stacks.

@@ -1,13 +1,14 @@
-<section class="card bg-gray-50 lg:w-1/2 lg:m-auto lg:mt-32 lg:shadow-xl">
+<section class="card bg-gray-50 lg:w-1/2 2xl:w-1/3 md:w-2/3 m-auto md:mt-24 shadow-lg lg:shadow-lg">
   <h1 class="heading text-center">How many can play</h1>
   <form phx-change="suggest" >
     <input phx-change="suggest" phx-debounce="200" type="text" name="q" value="<%= @query %>" placeholder="Game search" list="results" autocomplete="off" />
   </form>
-  <div>
-    <ul>
-      <%= for {num, val} <- @results do %>
-        <li><%= val %></li>
-      <% end %>
-    </ul>
-  </div>
+  <datalist id="results">
+    <%= for {num, val} <- @results do %>
+      <option phx-value-game="<%= num %>">
+        <%# <%= link val, to: Routes.game_path(@conn, :show) %> %>
+        <%= val %>
+      </option>
+    <% end %>
+  </datalist>
 </section>
