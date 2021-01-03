@@ -16,12 +16,12 @@ alias Howmanycanplay.Games.{Game, ModeType, Mode, Platform}
 ["Windows", "Stadia", "Xbox One", "PS4", "PS5", "Nintendo Switch"]
 |> Enum.map(&Repo.insert!(%Platform{name: &1}))
 
-[_, online_coop, pvp, pvpve | other_modes] =
+[_, online_coop, pvp, pvpve | _other_modes] =
   ["local co-op", "online co-op", "pvp", "pvpve", "local", "online", "multiplayer"]
   |> Enum.map(fn name -> Repo.insert!(%ModeType{name: name}) end)
 
 # Seed some games
-[destiny | other_games] =
+[destiny | _other_games] =
   ["Destiny 2", "Overwatch", "A Way Out"]
   |> Enum.map(fn name -> Repo.insert!(%Game{name: name}) end)
 
@@ -61,7 +61,7 @@ Repo.insert!(%Mode{
 
 Repo.insert!(%Mode{
   game_id: destiny.id,
-  mode_type_id: pvp.id,
+  mode_type_id: pvpve.id,
   name: "Gambit",
   description:
     "Teams compete by depositing motes dropped by defeated enemies and fighting a boss once enough motes are deposited",

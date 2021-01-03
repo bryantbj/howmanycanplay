@@ -1,6 +1,7 @@
 defmodule Howmanycanplay.Games.Mode do
   use Ecto.Schema
   import Ecto.Changeset
+  @derive {Jason.Encoder, except: [:__meta__, :game]}
 
   schema "modes" do
     field :name, :string

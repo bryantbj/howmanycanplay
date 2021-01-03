@@ -3,12 +3,15 @@ defmodule HowmanycanplayWeb.PageLive do
 
   @impl true
   def mount(_params, _session, socket) do
-    {:ok, assign(socket, query: "", results: %{})}
+    {:ok, assign(socket, query: "", results: %{}, selected: [])}
   end
+
+  def handle_event("submit", _params, socket), do: {:noreply, socket}
 
   @impl true
   def handle_event("suggest", %{"q" => query}, socket) do
-    {:noreply, assign(socket, results: search(query), query: query)}
+    {:noreply,
+     assign(socket, results: search(query), query: query, selected: socket.assigns.selected)}
   end
 
   @impl true
@@ -21,15 +24,20 @@ defmodule HowmanycanplayWeb.PageLive do
         {:noreply,
          socket
          |> put_flash(:error, "No dependencies found matching \"#{query}\"")
-         |> assign(results: %{}, query: query)}
+         |> assign(results: %{}, query: query, selected: socket.assigns.selected)}
     end
   end
 
-  def handle_event("select", %{"game" => game, "q" => query}, socket) do
+  def handle_event("select", %{"id" => id}, socket) do
+    game = Howmanycanplay.Games.get_game!(id)
+    selected = Enum.uniq_by([game], & &1.id)
+
     game
     |> IO.inspect(label: "game")
 
-    {:noreply, socket |> assign(results: %{}, query: query)}
+    {:noreply,
+     socket
+     |> assign(results: socket.assigns.results, query: socket.assigns.query, selected: selected)}
   end
 
   defp search(query) do
@@ -43,10 +51,12 @@ defmodule HowmanycanplayWeb.PageLive do
 
       _ ->
         result =
-          games()
-          |> Enum.find(fn str -> String.match?(str, ~r/#{query}/i) end)
+          Howmanycanplay.Games.Game
+          |> Howmanycanplay.Games.search_games(query)
+          |> IO.inspect(label: "search result")
 
-        (result && %{1 => result}) || %{1 => "No game found for search \"#{query}\""}
+        # (result && %{1 => result}) || %{1 => "No game found for search \"#{query}\""}
+        result || %{1 => "No game found for search \"#{query}\""}
     end
 
     # for {app, desc, vsn} <- Application.started_applications(),

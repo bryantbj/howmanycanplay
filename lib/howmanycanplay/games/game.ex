@@ -1,6 +1,7 @@
 defmodule Howmanycanplay.Games.Game do
   use Ecto.Schema
   import Ecto.Changeset
+  @derive {Jason.Encoder, except: [:__meta__]}
 
   schema "games" do
     field :name, :string

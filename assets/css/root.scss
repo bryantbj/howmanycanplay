@@ -1,4 +1,4 @@
-html, body {
+html{
   height: 100%;
 }
 
@@ -55,9 +55,9 @@ html, body {
 }
 
 .heading {
-  @apply text-5xl py-6
+  @apply text-5xl py-6;
 }
 
 .card {
-  @apply p-12 rounded-2xl
+  @apply p-6 md:p-12 rounded-2xl;
 }

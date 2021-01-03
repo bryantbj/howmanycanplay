@@ -1,0 +1,5 @@
+<%= for result <- @results do %>
+  <li class="p-1" id="game-<%= result.id %>" x-ref="game-<%= result.id %>" phx-click="select" phx-value-id="<%= result.id %>">
+    <%= result.name %>
+  </option>
+<% end %>

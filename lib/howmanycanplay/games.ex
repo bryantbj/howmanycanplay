@@ -4,6 +4,7 @@ defmodule Howmanycanplay.Games do
   """
 
   import Ecto.Query, warn: false
+  import Howmanycanplay.Helpers, only: [tsquery: 2, split_names_for_tsquery: 1]
   alias Howmanycanplay.Repo
 
   alias Howmanycanplay.Games.Game
@@ -37,6 +38,8 @@ defmodule Howmanycanplay.Games do
   """
   def get_game!(id), do: Repo.get!(Game, id)
 
+  @spec create_game(:invalid | %{optional(:__struct__) => none, optional(atom | binary) => any}) ::
+          any
   @doc """
   Creates a game.
 
@@ -100,6 +103,29 @@ defmodule Howmanycanplay.Games do
   """
   def change_game(%Game{} = game, attrs \\ %{}) do
     Game.changeset(game, attrs)
+  end
+
+  def base_game_query, do: from(g in Game)
+
+  def only_fields_query(fields) do
+  end
+
+  def search_games_query(query \\ Game, str) do
+    str = split_names_for_tsquery(str)
+
+    query
+    |> where([g], tsquery(g.name_tsv, ^str))
+    |> order_by([g], asc: g.name)
+    |> limit(10)
+  end
+
+  def search_games(query \\ Game, str) do
+    search_games_query(query, str) |> Repo.all()
+  end
+
+  def select_search_results_fields(query \\ Game) do
+    query
+    |> Ecto.Query.preload(modes: :mode_type)
   end
 
   alias Howmanycanplay.Games.Mode
