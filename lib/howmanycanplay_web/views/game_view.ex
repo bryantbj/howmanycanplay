@@ -1,5 +1,6 @@
 defmodule HowmanycanplayWeb.GameView do
   use HowmanycanplayWeb, :view
+  alias Howmanycanplay.Games
 
   def results_json(results) do
     results
@@ -22,5 +23,10 @@ defmodule HowmanycanplayWeb.GameView do
           [%{name: name, description: desc, min: min, max: max, mode_type: type.name} | acc]
         end)
     }
+  end
+
+  def min_max_players_text(game) do
+    %{min: min, max: max} = Games.min_max_players(game)
+    (min && max && "#{min} - #{max}") || "No data"
   end
 end

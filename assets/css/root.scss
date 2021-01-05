@@ -1,4 +1,4 @@
-html{
+html {
   height: 100%;
 }
 
@@ -13,14 +13,13 @@ html{
   h2 {
     @apply text-4xl;
   }
-  
 }
 
 @layer components {
   .nav--main {
     ul {
       li {
-        @apply uppercase
+        @apply uppercase;
       }
       li a {
         display: inline-block;
@@ -28,11 +27,11 @@ html{
         z-index: 1;
       }
       li a {
-        @apply text-gray-50 hover:text-pink-400
+        @apply text-gray-50 hover:text-pink-400;
       }
 
       li:not(:last-of-type) {
-        @apply mr-8
+        @apply mr-8;
       }
     }
   }
@@ -51,6 +50,13 @@ html{
   }
   .min-h-75 {
     min-height: 75vh;
+  }
+
+  .card--featured {
+    @apply card lg:w-1/2 md:w-2/3;
+  }
+  .card__header {
+    @apply p-3;
   }
 }
 

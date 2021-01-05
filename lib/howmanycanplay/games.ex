@@ -4,7 +4,6 @@ defmodule Howmanycanplay.Games do
   """
 
   import Ecto.Query, warn: false
-  import Howmanycanplay.Helpers, only: [tsquery: 2, split_names_for_tsquery: 1]
   alias Howmanycanplay.Repo
 
   alias Howmanycanplay.Games.Game
@@ -37,6 +36,12 @@ defmodule Howmanycanplay.Games do
 
   """
   def get_game!(id), do: Repo.get!(Game, id)
+
+  def get_game_and_modes!(id) do
+    Game
+    |> Ecto.Query.preload(modes: :mode_type)
+    |> Repo.get!(id)
+  end
 
   @spec create_game(:invalid | %{optional(:__struct__) => none, optional(atom | binary) => any}) ::
           any
@@ -111,11 +116,12 @@ defmodule Howmanycanplay.Games do
   end
 
   def search_games_query(query \\ Game, str) do
-    str = split_names_for_tsquery(str)
+    str = "%#{str}%"
 
     query
-    |> where([g], tsquery(g.name_tsv, ^str))
+    |> where([g], ilike(g.name, ^str))
     |> order_by([g], asc: g.name)
+    |> preload(modes: :mode_type)
     |> limit(10)
   end
 
@@ -126,6 +132,20 @@ defmodule Howmanycanplay.Games do
   def select_search_results_fields(query \\ Game) do
     query
     |> Ecto.Query.preload(modes: :mode_type)
+  end
+
+  def min_max_players(game) do
+    game.modes
+    |> Enum.reduce(%{min: nil, max: nil}, fn
+      mode, %{min: nil, max: nil} ->
+        %{min: mode.player_min_num, max: mode.player_max_num}
+
+      %{player_min_num: mode_min, player_max_num: mode_max}, %{min: min, max: max} ->
+        %{min: (mode_min < min && mode_min) || min, max: (mode_max > max && mode_max) || max}
+
+      _mode, map ->
+        map
+    end)
   end
 
   alias Howmanycanplay.Games.Mode

@@ -1,5 +1,9 @@
-<%= for result <- @results do %>
-  <li class="p-1" id="game-<%= result.id %>" x-ref="game-<%= result.id %>" phx-click="select" phx-value-id="<%= result.id %>">
-    <%= result.name %>
-  </option>
-<% end %>
+<%= for game <- @results do %>
+  <li id="game-<%= game.id %>" class="hover:bg-gray-200 p-3" x-ref="game-<%= game.id %>" phx-click="select" phx-value-id="<%= game.id %>">
+    <%= link to: Routes.game_path(@socket, :show, game) do %>
+      <div class="flex justify-between">
+        <span><%= game.name %></span>
+        <span class="text-gray-400"><%= HowmanycanplayWeb.GameView.min_max_players_text(game) %></span>
+      </div>
+    <% end %>
+  <% end %>

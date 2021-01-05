@@ -1,7 +1,7 @@
 defmodule Howmanycanplay.Helpers do
   defmacro tsquery(field, text) do
     quote do
-      fragment("?::tsvector @@ to_tsquery('english', ?)", unquote(field), unquote(text))
+      fragment("?::tsvector @@ to_tsquery('pg_catalog.simple', ?)", unquote(field), unquote(text))
     end
   end
 

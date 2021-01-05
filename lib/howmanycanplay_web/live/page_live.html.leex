@@ -8,13 +8,13 @@
       }
     }
   </script>
-  <section x-data="autocomplete()" @click.away="close" class="card lg:w-1/2 2xl:w-1/3 md:w-2/3 m-auto md:mt-24">
-    <h2 class="text-center">How many can play</h1>
+  <section x-data="autocomplete()" @click.away="close" class="card--featured m-auto md:mt-24">
+    <h2 class="text-center card__header">How many can play</h2>
     <form phx-change="suggest" phx-submit="submit">
       <input phx-change="suggest" phx-debounce="200" class="bg-gray-50 py-1 px-2 rounded-md border-gray-400 px-2 rounded-sm border-2 mt-3 focus:outline-none focus:ring w-full" type="text" name="q" x-on:focus="open" value="<%= @query %>" placeholder="Game search" autocomplete="off" />
     </form>
     <%= if Enum.any?(@results) do %>
-      <div class="suggestions shadow-lg p-3">
+      <div class="suggestions shadow-lg p-3 bg-gray-50">
         <ul id="autocomplete-suggestions" x-show="isOpen" x-ref="suggestions">
           <%= render(HowmanycanplayWeb.GameView, "search_results.html", assigns) %>
         </ul>

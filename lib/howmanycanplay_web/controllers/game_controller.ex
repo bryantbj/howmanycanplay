@@ -3,6 +3,7 @@ defmodule HowmanycanplayWeb.GameController do
 
   alias Howmanycanplay.Games
   alias Howmanycanplay.Games.Game
+  import Ecto.Query
 
   def index(conn, _params) do
     games = Games.list_games()
@@ -27,7 +28,8 @@ defmodule HowmanycanplayWeb.GameController do
   end
 
   def show(conn, %{"id" => id}) do
-    game = Games.get_game!(id)
+    game = Games.get_game_and_modes!(id)
+
     render(conn, "show.html", game: game)
   end
 
