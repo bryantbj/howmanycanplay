@@ -25,8 +25,33 @@ defmodule HowmanycanplayWeb.GameView do
     }
   end
 
-  def min_max_players_text(game) do
-    %{min: min, max: max} = Games.min_max_players(game)
-    (min && max && "#{min} - #{max}") || "No data"
+  def min_max_players_text(%{min_max_players: minmax = %{min: _min, max: _max}}) do
+    min_max_players_text(minmax)
+  end
+
+  def min_max_players_text(game = %Games.Game{}) do
+    minmax = %{min: _min, max: _max} = Games.min_max_players(game)
+
+    min_max_players_text(minmax)
+  end
+
+  def min_max_players_text(%{min: min, max: max}) do
+    cond do
+      min && max ->
+        "#{min} - #{max}"
+
+      min == nil && max == nil ->
+        ""
+
+      min == max ->
+        "#{min}"
+
+      true ->
+        ""
+    end
+  end
+
+  def min_max(%{min_max_players: minmax = %{min: _min, max: max}}) do
+    %{show?: (max && true) || false, text: min_max_players_text(minmax)}
   end
 end

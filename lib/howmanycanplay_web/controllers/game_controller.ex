@@ -29,6 +29,7 @@ defmodule HowmanycanplayWeb.GameController do
 
   def show(conn, %{"id" => id}) do
     game = Games.get_game_and_modes!(id)
+    game = Map.put(game, :min_max_players, Games.min_max_players(game))
 
     render(conn, "show.html", game: game)
   end
