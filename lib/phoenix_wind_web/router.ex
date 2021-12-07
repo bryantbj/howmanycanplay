@@ -17,7 +17,8 @@ defmodule PhoenixWindWeb.Router do
   scope "/", PhoenixWindWeb do
     pipe_through :browser
 
-    get "/", PageController, :index
+    # get "/", PageController, :index
+    live("/", PageLive)
   end
 
   # Other scopes may use custom stacks.
