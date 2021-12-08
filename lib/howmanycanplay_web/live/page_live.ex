@@ -1,5 +1,5 @@
-defmodule PhoenixWindWeb.PageLive do
-  use PhoenixWindWeb, :live_view
+defmodule HowmanycanplayWeb.PageLive do
+  use HowmanycanplayWeb, :live_view
 
   def mount(_params, _session, socket) do
     {:ok, socket}

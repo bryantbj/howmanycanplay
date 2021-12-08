@@ -1,5 +1,5 @@
-defmodule PhoenixWindWeb.PageControllerTest do
-  use PhoenixWindWeb.ConnCase
+defmodule HowmanycanplayWeb.PageControllerTest do
+  use HowmanycanplayWeb.ConnCase
 
   test "GET /", %{conn: conn} do
     conn = get(conn, "/")

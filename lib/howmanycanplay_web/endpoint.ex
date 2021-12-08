@@ -1,12 +1,12 @@
-defmodule PhoenixWindWeb.Endpoint do
-  use Phoenix.Endpoint, otp_app: :phoenix_wind
+defmodule HowmanycanplayWeb.Endpoint do
+  use Phoenix.Endpoint, otp_app: :howmanycanplay
 
   # The session will be stored in the cookie and signed,
   # this means its contents can be read but not tampered with.
   # Set :encryption_salt if you would also like to encrypt it.
   @session_options [
     store: :cookie,
-    key: "_phoenix_wind_key",
+    key: "_howmanycanplay_key",
     signing_salt: "WZlioKT8"
   ]
 
@@ -18,7 +18,7 @@ defmodule PhoenixWindWeb.Endpoint do
   # when deploying your static files in production.
   plug Plug.Static,
     at: "/",
-    from: :phoenix_wind,
+    from: :howmanycanplay,
     gzip: false,
     only: ~w(assets fonts images favicon.ico robots.txt)
 
@@ -28,7 +28,7 @@ defmodule PhoenixWindWeb.Endpoint do
     socket "/phoenix/live_reload/socket", Phoenix.LiveReloader.Socket
     plug Phoenix.LiveReloader
     plug Phoenix.CodeReloader
-    plug Phoenix.Ecto.CheckRepoStatus, otp_app: :phoenix_wind
+    plug Phoenix.Ecto.CheckRepoStatus, otp_app: :howmanycanplay
   end
 
   plug Phoenix.LiveDashboard.RequestLogger,
@@ -46,5 +46,5 @@ defmodule PhoenixWindWeb.Endpoint do
   plug Plug.MethodOverride
   plug Plug.Head
   plug Plug.Session, @session_options
-  plug PhoenixWindWeb.Router
+  plug HowmanycanplayWeb.Router
 end

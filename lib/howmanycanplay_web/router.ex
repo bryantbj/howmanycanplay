@@ -1,11 +1,11 @@
-defmodule PhoenixWindWeb.Router do
-  use PhoenixWindWeb, :router
+defmodule HowmanycanplayWeb.Router do
+  use HowmanycanplayWeb, :router
 
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
     plug :fetch_live_flash
-    plug :put_root_layout, {PhoenixWindWeb.LayoutView, :root}
+    plug :put_root_layout, {HowmanycanplayWeb.LayoutView, :root}
     plug :protect_from_forgery
     plug :put_secure_browser_headers
   end
@@ -14,7 +14,7 @@ defmodule PhoenixWindWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/", PhoenixWindWeb do
+  scope "/", HowmanycanplayWeb do
     pipe_through :browser
 
     # get "/", PageController, :index
@@ -22,7 +22,7 @@ defmodule PhoenixWindWeb.Router do
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", PhoenixWindWeb do
+  # scope "/api", HowmanycanplayWeb do
   #   pipe_through :api
   # end
 
@@ -38,7 +38,7 @@ defmodule PhoenixWindWeb.Router do
 
     scope "/" do
       pipe_through :browser
-      live_dashboard "/dashboard", metrics: PhoenixWindWeb.Telemetry
+      live_dashboard "/dashboard", metrics: HowmanycanplayWeb.Telemetry
     end
   end
 

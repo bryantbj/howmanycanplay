@@ -1,2 +1,2 @@
 ExUnit.start()
-Ecto.Adapters.SQL.Sandbox.mode(PhoenixWind.Repo, :manual)
+Ecto.Adapters.SQL.Sandbox.mode(Howmanycanplay.Repo, :manual)

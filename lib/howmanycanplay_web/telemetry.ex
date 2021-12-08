@@ -1,4 +1,4 @@
-defmodule PhoenixWindWeb.Telemetry do
+defmodule HowmanycanplayWeb.Telemetry do
   use Supervisor
   import Telemetry.Metrics
 
@@ -31,23 +31,23 @@ defmodule PhoenixWindWeb.Telemetry do
       ),
 
       # Database Metrics
-      summary("phoenix_wind.repo.query.total_time",
+      summary("howmanycanplay.repo.query.total_time",
         unit: {:native, :millisecond},
         description: "The sum of the other measurements"
       ),
-      summary("phoenix_wind.repo.query.decode_time",
+      summary("howmanycanplay.repo.query.decode_time",
         unit: {:native, :millisecond},
         description: "The time spent decoding the data received from the database"
       ),
-      summary("phoenix_wind.repo.query.query_time",
+      summary("howmanycanplay.repo.query.query_time",
         unit: {:native, :millisecond},
         description: "The time spent executing the query"
       ),
-      summary("phoenix_wind.repo.query.queue_time",
+      summary("howmanycanplay.repo.query.queue_time",
         unit: {:native, :millisecond},
         description: "The time spent waiting for a database connection"
       ),
-      summary("phoenix_wind.repo.query.idle_time",
+      summary("howmanycanplay.repo.query.idle_time",
         unit: {:native, :millisecond},
         description:
           "The time the connection spent waiting before being checked out for the query"
@@ -65,7 +65,7 @@ defmodule PhoenixWindWeb.Telemetry do
     [
       # A module, function and arguments to be invoked periodically.
       # This function must call :telemetry.execute/3 and a metric must be added above.
-      # {PhoenixWindWeb, :count_users, []}
+      # {HowmanycanplayWeb, :count_users, []}
     ]
   end
 end

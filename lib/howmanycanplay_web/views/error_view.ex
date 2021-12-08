@@ -1,5 +1,5 @@
-defmodule PhoenixWindWeb.ErrorView do
-  use PhoenixWindWeb, :view
+defmodule HowmanycanplayWeb.ErrorView do
+  use HowmanycanplayWeb, :view
 
   # If you want to customize a particular status code
   # for a certain format, you may uncomment below.

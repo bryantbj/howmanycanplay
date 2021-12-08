@@ -7,14 +7,14 @@
 # General application configuration
 import Config
 
-config :phoenix_wind,
-  ecto_repos: [PhoenixWind.Repo]
+config :howmanycanplay,
+  ecto_repos: [Howmanycanplay.Repo]
 
 # Configures the endpoint
-config :phoenix_wind, PhoenixWindWeb.Endpoint,
+config :howmanycanplay, HowmanycanplayWeb.Endpoint,
   url: [host: "localhost"],
-  render_errors: [view: PhoenixWindWeb.ErrorView, accepts: ~w(html json), layout: false],
-  pubsub_server: PhoenixWind.PubSub,
+  render_errors: [view: HowmanycanplayWeb.ErrorView, accepts: ~w(html json), layout: false],
+  pubsub_server: Howmanycanplay.PubSub,
   live_view: [signing_salt: "7/ladMiu"]
 
 # Configures the mailer
@@ -24,7 +24,7 @@ config :phoenix_wind, PhoenixWindWeb.Endpoint,
 #
 # For production it's recommended to configure a different adapter
 # at the `config/runtime.exs`.
-config :phoenix_wind, PhoenixWind.Mailer, adapter: Swoosh.Adapters.Local
+config :howmanycanplay, Howmanycanplay.Mailer, adapter: Swoosh.Adapters.Local
 
 # Swoosh API client is needed for adapters other than SMTP.
 config :swoosh, :api_client, false
