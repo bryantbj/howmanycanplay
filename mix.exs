@@ -20,7 +20,7 @@ defmodule Howmanycanplay.MixProject do
   def application do
     [
       mod: {Howmanycanplay.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, :httpoison]
     ]
   end
 
@@ -49,7 +49,9 @@ defmodule Howmanycanplay.MixProject do
       {:gettext, "~> 0.18"},
       {:jason, "~> 1.2"},
       {:plug_cowboy, "~> 2.5"},
-      {:rename, "0.1.0", only: :dev}
+      {:rename, "0.1.0", only: :dev},
+      {:httpoison, "~> 1.8"},
+      {:cachex, "~> 3.4"}
     ]
   end
 
