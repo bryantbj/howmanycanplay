@@ -75,7 +75,7 @@ defmodule Howmanycanplay.Game do
     |> Enum.map(&DateTime.from_unix!(&1[:date]))
     |> Enum.map(&%{date: "#{&1.year}-#{&1.month}-#{&1.day}", year: &1.year})
 
-    year_released = Enum.min_by(dates, & &1[:year])[:year]
+    year_released = Enum.any?(dates) and Enum.min_by(dates, & &1[:year])[:year] || nil
 
     destination
     |> Map.put(:release_dates, dates)

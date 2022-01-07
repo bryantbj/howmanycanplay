@@ -52,9 +52,11 @@ defmodule HowmanycanplayWeb.SearchLive do
           <% end %>
         </div>
       </div>
+      <%= if Mix.env == :dev do %>
       <code class="max-w-screen overflow-x">
       <%= Jason.encode!(@games) %>
       </code>
+      <% end %>
     </div>
     """
   end
