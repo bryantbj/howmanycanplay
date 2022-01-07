@@ -15,10 +15,10 @@ defmodule HowmanycanplayWeb.Router do
   end
 
   scope "/", HowmanycanplayWeb do
-    pipe_through :browser
+    pipe_through(:browser)
 
-    # get "/", PageController, :index
-    live("/", PageLive)
+    live("/", SearchLive)
+    live("/game", GameLive)
   end
 
   # Other scopes may use custom stacks.
@@ -37,8 +37,8 @@ defmodule HowmanycanplayWeb.Router do
     import Phoenix.LiveDashboard.Router
 
     scope "/" do
-      pipe_through :browser
-      live_dashboard "/dashboard", metrics: HowmanycanplayWeb.Telemetry
+      pipe_through(:browser)
+      live_dashboard("/dashboard", metrics: HowmanycanplayWeb.Telemetry)
     end
   end
 
@@ -48,7 +48,7 @@ defmodule HowmanycanplayWeb.Router do
   # node running the Phoenix server.
   if Mix.env() == :dev do
     scope "/dev" do
-      pipe_through :browser
+      pipe_through(:browser)
 
       forward "/mailbox", Plug.Swoosh.MailboxPreview
     end

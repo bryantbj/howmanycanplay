@@ -15,9 +15,11 @@ defmodule Howmanycanplay.Application do
       # Start the PubSub system
       {Phoenix.PubSub, name: Howmanycanplay.PubSub},
       # Start the Endpoint (http/https)
-      HowmanycanplayWeb.Endpoint
+      HowmanycanplayWeb.Endpoint,
       # Start a worker by calling: Howmanycanplay.Worker.start_link(arg)
       # {Howmanycanplay.Worker, arg}
+      %{id: Cachex, start: {Cachex, :start_link, [[name: :cache]]}},
+      %{id: :cachex_igdb, start: {Cachex, :start_link, [[name: :igdb]]}}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

@@ -1,3 +1,5 @@
-# phoenixwind
+# How Many Can Play?
 
-A Phoenix 1.6 + Tailwindcss template using esbuild
+The goal of this project is to track how many players can
+play games. There is no good, cohesive resource for
+keeping track of this, surprisingly.
