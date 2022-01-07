@@ -71,6 +71,11 @@ defmodule Howmanycanplay.MixProject do
         "cmd --cd assets npm run deploy",
         "esbuild default --minify",
         "phx.digest"
+      ],
+      "deploy": [
+        "cmd --cd assets npm run deploy",
+        "esbuild default --minify",
+        "phx.digest"
       ]
     ]
   end
