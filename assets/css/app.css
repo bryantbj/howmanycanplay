@@ -3,6 +3,13 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+  .card.image-full:before {
+    opacity: 0.85;
+    @apply bg-gradient-to-b from-neutral via-near-black to-primary;
+  }
+}
+
 .mono {
   font-family: "Roboto Mono", monospace;
 }
@@ -65,77 +72,6 @@ h6 {
   }
 }
 
-.card:not(.glass) {
-  /* @apply bg-base-100; */
-}
-/**
-  html {
-    height: 100vh;
-  }
-
-  body {
-    height: 100%;
-    font-family: 'Ubuntu', sans-serif;
-    line-height: 1.6em;
-    @apply bg-gradient-to-b from-near-black to-blackest text-cream;
-  }
-  
-  body main {
-    @apply h-full;
-  }
-  
-  h1 {
-    @apply text-3xl;
-  }
-  
-  input[type=text] {
-    @apply py-3 px-3;
-  }
-  
-  h1 {
-    @apply text-3xl font-bold py-2;
-  }
-  
-  h2 {
-    @apply text-2xl font-bold py-2;
-  }
-  
-  h3 {
-    @apply text-lg font-bold py-2;
-  }
-  
-  
-  
-  @layer components {
-    .wrapper {
-      @apply w-full md:w-1/2 sm:w-3/4 mx-auto;
-    }
-    .card {
-      @apply px-8 py-5 flex-col;
-    }
-    .card.gutter-x-0 {
-      @apply px-0;
-    }
-    .card.gutter-y-0 {
-      @apply px-0;
-    }
-    .card-dark {
-    }
-    .card .card-title h1 {
-      @apply pb-0;
-    }
-    .card .card-title .card-subtitle {
-      @apply text-base font-normal text-gray-100 pt-0 pl-1;
-    }
-    .card .card-body {}
-    .list .list-item {
-      @apply p-3;
-    }
-    .list .list-item.two-line {
-      @apply py-7;
-    }
-  }
-  */
 /* -- Animations */
 
 .rotate-center {

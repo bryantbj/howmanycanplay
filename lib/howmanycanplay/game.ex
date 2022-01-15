@@ -1,6 +1,18 @@
 defmodule Howmanycanplay.Game do
   @derive Jason.Encoder
-  defstruct [:name, :summary, game_modes: [], genres: [], multiplayer_modes: [], platforms: []]
+  defstruct [
+    :name,
+    :summary,
+    :api_id,
+    :follows,
+    :cover_url,
+    :thumb_url,
+    :year_released,
+    game_modes: [],
+    genres: [],
+    multiplayer_modes: [],
+    platforms: []
+  ]
 
   alias Howmanycanplay.Game
 
@@ -13,6 +25,7 @@ defmodule Howmanycanplay.Game do
     |> Map.put(:follows, map[:follows])
     |> Map.put(:game_modes, Enum.map(map[:game_modes] || [], & &1[:name]))
     |> Map.put(:genres, Enum.map(map[:genres] || [], & &1[:name]))
+    |> put_cover_url(map)
     |> put_dates(map)
     |> put_platforms(map)
     |> put_multiplayer_modes(map)
@@ -43,18 +56,19 @@ defmodule Howmanycanplay.Game do
   def put_platforms(destination, _), do: destination
 
   def put_multiplayer_modes(destination, %{:multiplayer_modes => modes} = source) do
-    modes = modes
-    |> Enum.map(fn mode ->
-      case mode do
-        %{:platform => platform} ->
-          Enum.find(source[:platforms] || [], &(&1[:id] == platform))
-          |> Map.take(~w[name abbreviation]a)
-          |> then(&Map.put(mode, :platform, &1))
+    modes =
+      modes
+      |> Enum.map(fn mode ->
+        case mode do
+          %{:platform => platform} ->
+            Enum.find(source[:platforms] || [], &(&1[:id] == platform))
+            |> Map.take(~w[name abbreviation]a)
+            |> then(&Map.put(mode, :platform, &1))
 
-        mode ->
-          mode
-      end
-    end)
+          mode ->
+            mode
+        end
+      end)
 
     onlinecoopmax = Enum.max_by(modes, & &1[:onlinecoopmax])[:onlinecoopmax]
 
@@ -70,12 +84,13 @@ defmodule Howmanycanplay.Game do
   end
 
   def put_dates(destination, %{:release_dates => dates}) do
-    dates = dates
-    |> Enum.filter(& &1[:date])
-    |> Enum.map(&DateTime.from_unix!(&1[:date]))
-    |> Enum.map(&%{date: "#{&1.year}-#{&1.month}-#{&1.day}", year: &1.year})
+    dates =
+      dates
+      |> Enum.filter(& &1[:date])
+      |> Enum.map(&DateTime.from_unix!(&1[:date]))
+      |> Enum.map(&%{date: "#{&1.year}-#{&1.month}-#{&1.day}", year: &1.year})
 
-    year_released = Enum.any?(dates) and Enum.min_by(dates, & &1[:year])[:year] || nil
+    year_released = (Enum.any?(dates) and Enum.min_by(dates, & &1[:year])[:year]) || nil
 
     destination
     |> Map.put(:release_dates, dates)
@@ -86,5 +101,19 @@ defmodule Howmanycanplay.Game do
     destination
     |> Map.put(:release_dates, [])
     |> Map.put(:year_released, nil)
+  end
+
+  def put_cover_url(destination, %{cover: %{url: url}}) do
+    thumb = String.replace(url, "thumb", "cover_big")
+    cover = String.replace(url, "thumb", "cover_big_2x")
+
+    destination
+    |> Map.put(:thumb_url, thumb)
+    |> Map.put(:cover_url, cover)
+  end
+
+  def put_cover_url(destination, _) do
+    destination
+    |> Map.put(:cover_url, nil)
   end
 end

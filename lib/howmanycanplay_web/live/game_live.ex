@@ -21,8 +21,11 @@ defmodule HowmanycanplayWeb.GameLive do
   def render(assigns) do
     ~H"""
     <div class="wrapper">
-      <div class="card">
-        <div class="card-body">
+      <div class="card image-full">
+        <figure>
+          <img loading="lazy" src={@game.cover_url} />
+        </figure>
+        <div class="card-body justify-end">
         <div class="card-title">
           <h1 class="card-title mb-0 uppercase tracking-widest"><%= @game.name %></h1>
           <h6 class="text-sm font-normal lowercase text-opacity-50"><%= @game.genres ++ @game.game_modes |> Enum.join(", ") %></h6>

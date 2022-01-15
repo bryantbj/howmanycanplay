@@ -100,7 +100,7 @@ defmodule Igdb do
       "/multiquery",
       """
       query games "Game #{id}" {
-        fields id,name,summary,cover.url,genres.name,multiplayer_modes.*,platforms.name,platforms.abbreviation,game_modes.name;
+        fields id,name,summary,cover.url,cover.image_id,genres.name,multiplayer_modes.*,platforms.name,platforms.abbreviation,game_modes.name,game_modes.*;
         where id = #{id};
         limit 1;
       };
