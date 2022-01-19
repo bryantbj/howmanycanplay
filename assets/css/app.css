@@ -4,9 +4,43 @@
 @tailwind utilities;
 
 @layer components {
+  .card.game-card {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: minmax(125px, 10%) 1fr;
+    grid-template-areas:
+      "spacer"
+      "body";
+  }
+  .card.game-card figure {
+    position: absolute;
+    display: block;
+  }
+  .card.game-card .card-body {
+    grid-area: body;
+    z-index: 20;
+  }
+
+  .card.game-card:before {
+    grid-column-start: 1;
+    grid-row-start: 1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    content: "";
+    opacity: 0.9;
+    height: 100%;
+    width: 100%;
+    z-index: 10;
+    @apply bg-gradient-to-t from-primary via-near-black to-near-black/[.75];
+  }
+
   .card.image-full:before {
     opacity: 0.85;
     @apply bg-gradient-to-b from-neutral via-near-black to-primary;
+  }
+  .card.image-full:before {
+    @apply sm:rounded-none md:rounded-2xl;
   }
 }
 

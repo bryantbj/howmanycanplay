@@ -2,7 +2,6 @@ defmodule HowmanycanplayWeb.SearchLive do
   use HowmanycanplayWeb, :live_view
 
   def mount(params, _session, socket) do
-    # socket = assign(socket, key: value)
     tz = Map.get(params, "tz", "America/Chicago")
     q = Map.get(params, "q", nil)
 
@@ -129,8 +128,7 @@ defmodule HowmanycanplayWeb.SearchLive do
           |> assign(loading: false)
 
         {_, games} ->
-          games =
-            Enum.sort_by(games, & {&1.onlinecoopmax, &1.follows}, :desc)
+          games = Enum.sort_by(games, &{&1.onlinecoopmax, &1.follows}, :desc)
 
           socket
           |> assign(q: query, loading: false, games: games)
