@@ -1,0 +1,82 @@
+{
+  "name": "Game 8173",
+  "result": [
+    {
+      "cover": {
+        "id": 82091,
+        "image_id": "co1rcb",
+        "url": "//images.igdb.com/igdb/image/upload/t_thumb/co1rcb.jpg"
+      },
+      "game_modes": [
+        {
+          "checksum": "288b548c-11e4-d910-f037-21d4e6a33b38",
+          "created_at": 1298937600,
+          "id": 2,
+          "name": "Multiplayer",
+          "slug": "multiplayer",
+          "updated_at": 1323216000,
+          "url": "https://www.igdb.com/game_modes/multiplayer"
+        }
+      ],
+      "genres": [
+        { "id": 5, "name": "Shooter" },
+        { "id": 15, "name": "Strategy" }
+      ],
+      "id": 8173,
+      "multiplayer_modes": [
+        {
+          "campaigncoop": false,
+          "checksum": "bf75bd66-0d2f-c6ca-a01c-c5b8ef5a39f5",
+          "dropin": true,
+          "game": 8173,
+          "id": 7838,
+          "lancoop": false,
+          "offlinecoop": false,
+          "offlinecoopmax": 0,
+          "offlinemax": 0,
+          "onlinecoop": true,
+          "onlinecoopmax": 6,
+          "onlinemax": 12,
+          "platform": 6,
+          "splitscreen": false
+        },
+        {
+          "campaigncoop": false,
+          "checksum": "4d84b82a-9cab-4bfd-9d0d-86dc0bb66f62",
+          "dropin": true,
+          "game": 8173,
+          "id": 7839,
+          "lancoop": false,
+          "offlinecoop": false,
+          "onlinecoop": true,
+          "onlinecoopmax": 6,
+          "onlinemax": 12,
+          "platform": 49,
+          "splitscreen": false
+        },
+        {
+          "campaigncoop": false,
+          "checksum": "0a445a25-5e34-d012-89cb-9dc7a6869b62",
+          "dropin": true,
+          "game": 8173,
+          "id": 7840,
+          "lancoop": false,
+          "offlinecoop": false,
+          "onlinecoop": true,
+          "onlinecoopmax": 6,
+          "onlinemax": 12,
+          "platform": 48,
+          "splitscreen": false
+        }
+      ],
+      "name": "Overwatch",
+      "platforms": [
+        { "abbreviation": "PC", "id": 6, "name": "PC (Microsoft Windows)" },
+        { "abbreviation": "PS4", "id": 48, "name": "PlayStation 4" },
+        { "abbreviation": "XONE", "id": 49, "name": "Xbox One" },
+        { "abbreviation": "Switch", "id": 130, "name": "Nintendo Switch" }
+      ],
+      "summary": "In Overwatch, you control one of several heroes in competitive 6-person team shooting matches. Battle over objectives, take down the other team, and achieve victory.\\n\\nIn Overwatch, heroes do battle in diverse locations around the world. From the technological marvel of Numbani to the manufacturing powerhouse of Volskaya, each map has a unique layout and specific win conditions that your team must meet in order to secure victory."
+    }
+  ]
+}
