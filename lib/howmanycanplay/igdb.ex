@@ -1,7 +1,7 @@
 defmodule Igdb do
   use HTTPoison.Base
   import Twitch, only: [client_id: 0, token: 0]
-  alias Howmanycanplay.Game
+  alias Howmanycanplay.ApiGame
 
   @endpoint "https://api.igdb.com/v4"
 
@@ -69,7 +69,7 @@ defmodule Igdb do
 
     case post("/games", search_game_query(keyword, Keyword.merge(defaults, opts))) do
       {:ok, %{body: resp}} ->
-        {:ok, Enum.map(resp, &Game.new/1)}
+        {:ok, Enum.map(resp, &ApiGame.new/1)}
 
       {:error, _} ->
         {:error, "idk"}
@@ -88,7 +88,7 @@ defmodule Igdb do
 
     with {:ok, %{body: resp}} <- game_resp,
          [%{result: [game]}] <- resp do
-      {:ok, Game.new(game)}
+      {:ok, ApiGame.new(game)}
     else
       {:error, error} -> {:error, error}
       {_, other} -> {:ok, other}

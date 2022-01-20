@@ -1,6 +1,7 @@
-defmodule Howmanycanplay.Game do
+defmodule Howmanycanplay.ApiGame do
   @derive Jason.Encoder
   defstruct [
+    :id,
     :name,
     :summary,
     :api_id,
@@ -14,10 +15,8 @@ defmodule Howmanycanplay.Game do
     platforms: []
   ]
 
-  alias Howmanycanplay.Game
-
   def new(map) when is_map(map) do
-    %Game{}
+    %__MODULE__{}
     |> Map.put(:id, map[:id])
     |> Map.put(:api_id, map[:id])
     |> Map.put(:name, map[:name])
