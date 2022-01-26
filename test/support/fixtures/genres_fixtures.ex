@@ -18,4 +18,19 @@ defmodule Howmanycanplay.GenresFixtures do
 
     genre
   end
+
+  @doc """
+  Generate a game_genre.
+  """
+  def game_genre_fixture(attrs \\ %{}) do
+    {:ok, game_genre} =
+      attrs
+      |> Enum.into(%{
+        game_id: 1,
+        genre_id: 1
+      })
+      |> Howmanycanplay.Genres.create_game_genre()
+
+    game_genre
+  end
 end
