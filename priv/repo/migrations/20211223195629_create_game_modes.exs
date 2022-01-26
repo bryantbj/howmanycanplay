@@ -3,9 +3,11 @@ defmodule Howmanycanplay.Repo.Migrations.CreateGameModes do
 
   def change do
     create table(:game_modes) do
-      add :name, :string
+      add :name, :string, null: false
 
       timestamps()
     end
+
+    create unique_index(:game_modes, [:name], name: :game_mode_name_uniq_indx)
   end
 end

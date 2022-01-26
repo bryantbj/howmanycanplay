@@ -51,7 +51,9 @@ defmodule Howmanycanplay.MixProject do
       {:plug_cowboy, "~> 2.5"},
       {:rename, "0.1.0", only: :dev},
       {:httpoison, "~> 1.8"},
-      {:cachex, "~> 3.4"}
+      {:cachex, "~> 3.4"},
+      {:ex_machina, "~> 2.7.0"},
+      {:mock, "~> 0.3.0", only: :test}
     ]
   end
 

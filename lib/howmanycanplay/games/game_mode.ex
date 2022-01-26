@@ -3,7 +3,7 @@ defmodule Howmanycanplay.Games.GameMode do
   import Ecto.Changeset
 
   schema "game_modes" do
-    field :name, :string
+    field :name, :string, null: false
 
     timestamps()
   end
@@ -13,5 +13,6 @@ defmodule Howmanycanplay.Games.GameMode do
     game_mode
     |> cast(attrs, [:name])
     |> validate_required([:name])
+    |> unique_constraint([:name], name: :game_mode_name_uniq_indx)
   end
 end

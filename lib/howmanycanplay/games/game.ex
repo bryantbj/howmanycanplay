@@ -6,15 +6,35 @@ defmodule Howmanycanplay.Games.Game do
   schema "games" do
     field :name, :string
     field :summary, :string
+    field :api_id, :integer
+    many_to_many :genres, Howmanycanplay.Genres.Genre, join_through: "games_genres"
 
     timestamps()
   end
 
+  @required ~w[name summary]a
+
   @doc false
   def changeset(game, attrs) do
     game
-    |> cast(attrs, [:name, :summary])
-    |> validate_required([:name, :summary])
+    |> cast(attrs, [:name, :summary, :api_id])
+    |> validate_required(@required)
+    |> unique_constraint(:api_id, name: :games_api_id_uniq_idx)
+  end
+
+  def assoc_genres(changeset, %{genres: []}) do
+    changeset
+  end
+
+  def assoc_genres(changeset, %{genres: genres}) do
+    changeset
+    |> put_assoc(:genres, genres)
+  end
+
+  def api_game_changeset(game, api_game) do
+    game
+    |> changeset(api_game)
+    |> assoc_genres(api_game)
   end
 
   def new_from_api(data) when is_map(data) do

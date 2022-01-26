@@ -3,7 +3,7 @@ defmodule Howmanycanplay.Repo.Migrations.CreateMultiplayerModes do
 
   def change do
     create table(:multiplayer_modes) do
-      add :name, :string
+      add :name, :string, null: false
 
       timestamps()
     end

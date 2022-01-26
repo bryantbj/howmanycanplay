@@ -5,8 +5,8 @@ defmodule Howmanycanplay.Repo.Migrations.CreateGamesMultiplayerModes do
     create table(:games_multiplayer_modes) do
       add :max_coop_count, :integer
       add :max_mode_count, :integer
-      add :game_id, references(:games, on_delete: :nothing)
-      add :multiplayer_mode_id, references(:multiplayer_modes, on_delete: :nothing)
+      add :game_id, references(:games, on_delete: :nothing), null: false
+      add :multiplayer_mode_id, references(:multiplayer_modes, on_delete: :nothing), null: false
 
       timestamps()
     end

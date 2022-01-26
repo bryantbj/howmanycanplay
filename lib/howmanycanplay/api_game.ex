@@ -9,10 +9,12 @@ defmodule Howmanycanplay.ApiGame do
     :cover_url,
     :thumb_url,
     :year_released,
+    :onlinecoopmax,
     game_modes: [],
     genres: [],
     multiplayer_modes: [],
-    platforms: []
+    platforms: [],
+    release_dates: []
   ]
 
   def new(map) when is_map(map) do

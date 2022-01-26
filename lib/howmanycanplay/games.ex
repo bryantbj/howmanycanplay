@@ -7,6 +7,7 @@ defmodule Howmanycanplay.Games do
   alias Howmanycanplay.Repo
 
   alias Howmanycanplay.Games.Game
+  alias Howmanycanplay.ApiGame
 
   @doc """
   Returns the list of games.
@@ -37,6 +38,52 @@ defmodule Howmanycanplay.Games do
   """
   def get_game!(id), do: Repo.get!(Game, id)
 
+  def get_game_by_api_id!(id), do: Repo.get_by(Game, %{api_id: id})
+
+  def get_or_fetch_and_create_game!(id) do
+    game? = get_game_by_api_id!(id)
+
+    case game? do
+      # If the game isn't found in the db,
+      # create it and return it.
+      nil ->
+        with {:ok, %{body: [%{result: [resp]}]}} <- Igdb.game_api(id),
+             {:ok, %Game{} = game} <- create_game_from_api_game(ApiGame.new(resp)) do
+          {:ok, game}
+        else
+          # Operational errors
+          {:error, error} ->
+            {:error, error}
+
+          # Changeset errors
+          %{errors: errors} ->
+            {:error, errors}
+
+          # Something unexpected
+          other ->
+            IO.inspect(other, label: "get_or_fetch_and_insert_game! other error")
+            {:error, "something weird happened"}
+        end
+
+      # Otherwise, if it is found, return it.
+      game ->
+        {:ok, game}
+    end
+  end
+
+  def create_game_from_api_game(%ApiGame{} = api_game) do
+    api_game
+    |> Map.from_struct()
+    |> create_game_from_api_game()
+  end
+
+  def create_game_from_api_game(api_game) when is_map(api_game) do
+    Game.api_game_changeset(%Game{}, api_game)
+    |> Repo.insert()
+  end
+
+  def create_game_from_api_game(_), do: {:error, "Expected api_game to be ApiGame or Map"}
+
   @doc """
   Creates a game.
 
@@ -49,7 +96,13 @@ defmodule Howmanycanplay.Games do
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_game(attrs \\ %{}) do
+  def create_game(attrs \\ %{})
+
+  def create_game(%Ecto.Changeset{} = changeset) do
+    Repo.insert(changeset)
+  end
+
+  def create_game(attrs) do
     %Game{}
     |> Game.changeset(attrs)
     |> Repo.insert()

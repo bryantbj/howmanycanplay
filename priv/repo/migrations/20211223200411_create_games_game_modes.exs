@@ -3,8 +3,8 @@ defmodule Howmanycanplay.Repo.Migrations.CreateGamesGameModes do
 
   def change do
     create table(:games_game_modes) do
-      add :game_id, references(:games, on_delete: :nothing)
-      add :game_mode_id, references(:game_modes, on_delete: :nothing)
+      add :game_id, references(:games, on_delete: :nothing), null: false
+      add :game_mode_id, references(:game_modes, on_delete: :nothing), null: false
 
       timestamps()
     end
